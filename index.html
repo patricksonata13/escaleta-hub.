@@ -478,6 +478,186 @@
       color: white;
     }
 
+    /* ===== NOVOS ESTILOS PARA AS NOVAS FUNCIONALIDADES ===== */
+    /* Estilos para a aba Personagens */
+    .personagens-content {
+      padding: 15px;
+    }
+    
+    .personagens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .personagem-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      border-left: 4px solid var(--secondary);
+    }
+    
+    .personagem-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .personagem-nome {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--secondary);
+    }
+    
+    .personagem-info {
+      margin-bottom: 10px;
+    }
+    
+    .personagem-info p {
+      margin: 5px 0;
+    }
+    
+    .personagem-descricao {
+      margin-top: 10px;
+      padding: 10px;
+      background: var(--light);
+      border-radius: 4px;
+    }
+    
+    /* Estilos para a aba Pesquisa */
+    .pesquisa-content {
+      padding: 15px;
+    }
+    
+    .pesquisa-subabas {
+      display: flex;
+      border-bottom: 1px solid #d0e0f0;
+      margin-bottom: 15px;
+    }
+    
+    .pesquisa-subaba {
+      padding: 10px 15px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      border-bottom: 3px solid transparent;
+    }
+    
+    .pesquisa-subaba.active {
+      border-bottom-color: var(--secondary);
+      color: var(--secondary);
+      font-weight: bold;
+    }
+    
+    .pesquisa-subaba-conteudo {
+      display: none;
+    }
+    
+    .pesquisa-subaba-conteudo.active {
+      display: block;
+    }
+    
+    .comentarios-lista {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    
+    .comentario-item {
+      background: white;
+      padding: 15px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    
+    .comentario-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .comentario-texto {
+      margin-bottom: 10px;
+    }
+    
+    .comentario-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #d0e0f0;
+      border-radius: 4px;
+      margin-bottom: 10px;
+      resize: vertical;
+    }
+    
+    .imagens-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    
+    .imagem-item {
+      border: 1px solid #d0e0f0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+    }
+    
+    .imagem-placeholder {
+      height: 150px;
+      background: var(--light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+    }
+    
+    .imagem-info {
+      padding: 10px;
+    }
+    
+    /* Estilos para o buscador online */
+    .buscador-modal .modal-content {
+      width: 80%;
+      max-width: 800px;
+    }
+    
+    .buscador-container {
+      padding: 15px;
+    }
+    
+    .buscador-bar {
+      display: flex;
+      margin-bottom: 15px;
+    }
+    
+    .buscador-input {
+      flex: 1;
+      padding: 10px 15px;
+      border: 1px solid #d0e0f0;
+      border-radius: 4px 0 0 4px;
+      font-size: 1rem;
+    }
+    
+    .buscador-btn {
+      padding: 10px 20px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+    
+    .buscador-frame {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #d0e0f0;
+      border-radius: 4px;
+    }
+
     @media(max-width:900px){ 
         .main-container{flex-direction:column;} 
         .sidebar{width:100%; order:2;} 
@@ -489,6 +669,8 @@
         .toolbar-group { flex-wrap:wrap; }
         .docs-editor { width: 100%; padding: 20px; }
         .docs-toolbar-group { margin-right: 8px; padding-right: 8px; }
+        .personagens-grid { grid-template-columns: 1fr; }
+        .imagens-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
     }
   </style>
 </head>
@@ -541,12 +723,12 @@
                     <button class="sidebar-btn" data-tab="biblia-tab"><i class="fas fa-book"></i> Bíblia</button>
                     <button class="sidebar-btn" data-tab="escaleta-tab"><i class="fas fa-list-ol"></i> Escaleta</button>
                     <button class="sidebar-btn" data-tab="storyboard-tab"><i class="fas fa-palette"></i> Storyboard</button>
+                    <button class="sidebar-btn" data-tab="personagens-tab"><i class="fas fa-users"></i> Personagens</button>
                 </div>
                 <div class="sidebar-section">
                     <h3><i class="fas fa-cog"></i> Ferramentas</h3>
-                    <button class="sidebar-btn" id="stats-btn"><i class="fas fa-chart-bar"></i> Estatísticas</button>
-                    <button class="sidebar-btn" id="characters-btn"><i class="fas fa-users"></i> Personagens</button>
-                    <button class="sidebar-btn" id="search-btn"><i class="fas fa-search"></i> Buscar</button>
+                    <button class="sidebar-btn" data-tab="pesquisa-tab"><i class="fas fa-search"></i> Pesquisa</button>
+                    <button class="sidebar-btn" id="buscador-btn"><i class="fas fa-globe"></i> Buscador Online</button>
                 </div>
                 <div class="sidebar-section">
                     <h3><i class="fas fa-project-diagram"></i> Projeto</h3>
@@ -567,6 +749,8 @@
                     <button class="tab-button" data-tab="biblia-tab"><i class="fas fa-book"></i> Bíblia do Projeto</button>
                     <button class="tab-button" data-tab="escaleta-tab"><i class="fas fa-list-ol"></i> Escaleta</button>
                     <button class="tab-button" data-tab="storyboard-tab"><i class="fas fa-palette"></i> Storyboard</button>
+                    <button class="tab-button" data-tab="personagens-tab"><i class="fas fa-users"></i> Personagens</button>
+                    <button class="tab-button" data-tab="pesquisa-tab"><i class="fas fa-search"></i> Pesquisa</button>
                 </div>
 
                 <div class="editor-container">
@@ -680,7 +864,7 @@
                             <div class="biblia-section">
                                 <h4>Storyline</h4>
                                 <p contenteditable="true">1. Introdução dos personagens e do conflito principal.</p>
-                                <p contenteditable="true">2. Desenvolvimento das relações e aumento da tensão.</p>
+                                <p contenteditable="true">2. Desenvolvimento das relações e aumento da tension.</p>
                                 <p contenteditable="true">3. Clímax e resolução do conflito.</p>
                             </div>
                         </div>
@@ -818,6 +1002,229 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- ABA PERSONAGENS (NOVA) -->
+                    <div id="personagens-tab" class="tab-content">
+                        <div class="toolbar">
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" id="novo-personagem-btn"><i class="fas fa-plus"></i> Novo Personagem</button>
+                                <button class="toolbar-btn" id="importar-personagem-btn"><i class="fas fa-file-import"></i> Importar</button>
+                            </div>
+                            <div style="flex:1"></div>
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn"><i class="fas fa-print"></i> Imprimir</button>
+                                <button class="toolbar-btn"><i class="fas fa-share-alt"></i> Compartilhar</button>
+                            </div>
+                        </div>
+                        
+                        <div class="personagens-content">
+                            <div class="personagens-grid">
+                                <div class="personagem-card">
+                                    <div class="personagem-header">
+                                        <div class="personagem-nome" contenteditable="true">João Silva</div>
+                                        <div>
+                                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-edit"></i></button>
+                                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="personagem-info">
+                                        <p><strong>Idade:</strong> <span contenteditable="true">35 anos</span></p>
+                                        <p><strong>Ocupação:</strong> <span contenteditable="true">Detetive</span></p>
+                                        <p><strong>Personalidade:</strong> <span contenteditable="true">Determinado, inteligente, teimoso</span></p>
+                                    </div>
+                                    <div class="personagem-descricao" contenteditable="true">
+                                        João é um detetive particular que está investigando o desaparecimento de sua irmã. Ele é obstinado em sua busca pela verdade, mesmo quando isso coloca sua vida em perigo.
+                                    </div>
+                                </div>
+                                
+                                <div class="personagem-card">
+                                    <div class="personagem-header">
+                                        <div class="personagem-nome" contenteditable="true">Maria Santos</div>
+                                        <div>
+                                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-edit"></i></button>
+                                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="personagem-info">
+                                        <p><strong>Idade:</strong> <span contenteditable="true">32 anos</span></p>
+                                        <p><strong>Ocupação:</strong> <span contenteditable="true">Jornalista</span></p>
+                                        <p><strong>Personalidade:</strong> <span contenteditable="true">Corajosa, perspicaz, leal</span></p>
+                                    </div>
+                                    <div class="personagem-descricao" contenteditable="true">
+                                        Maria é uma jornalista investigativa que está escrevendo uma matéria sobre corrupção policial. Ela cruza o caminho de João e decide ajudá-lo em sua investigação.
+                                    </div>
+                                </div>
+                                
+                                <div class="personagem-card">
+                                    <div class="personagem-header">
+                                        <div class="personagem-nome" contenteditable="true">Antônio Costa</div>
+                                        <div>
+                                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-edit"></i></button>
+                                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-trash"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="personagem-info">
+                                        <p><strong>Idade:</strong> <span contenteditable="true">45 anos</span></p>
+                                        <p><strong>Ocupação:</strong> <span contenteditable="true">Delegado</span></p>
+                                        <p><strong>Personalidade:</strong> <span contenteditable="true">Misterioso, reservado, ambicioso</span></p>
+                                    </div>
+                                    <div class="personagem-descricao" contenteditable="true">
+                                        Antônio é um delegado que parece estar escondendo informações sobre o caso que João está investigando. Suas motivações não são claras.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABA PESQUISA (NOVA) -->
+                    <div id="pesquisa-tab" class="tab-content">
+                        <div class="toolbar">
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn" id="nova-pesquisa-btn"><i class="fas fa-plus"></i> Nova Pesquisa</button>
+                                <button class="toolbar-btn" id="organizar-pesquisa-btn"><i class="fas fa-folder"></i> Organizar</button>
+                            </div>
+                            <div style="flex:1"></div>
+                            <div class="toolbar-group">
+                                <button class="toolbar-btn"><i class="fas fa-download"></i> Exportar</button>
+                            </div>
+                        </div>
+                        
+                        <div class="pesquisa-content">
+                            <div class="pesquisa-subabas">
+                                <button class="pesquisa-subaba active" data-subaba="comentarios-subaba">Comentários</button>
+                                <button class="pesquisa-subaba" data-subaba="imagens-subaba">Imagens</button>
+                                <button class="pesquisa-subaba" data-subaba="referencias-subaba">Referências</button>
+                            </div>
+                            
+                            <div id="comentarios-subaba" class="pesquisa-subaba-conteudo active">
+                                <h3>Comentários da Pesquisa</h3>
+                                <div class="comentarios-lista">
+                                    <div class="comentario-item">
+                                        <div class="comentario-header">
+                                            <span><strong>João</strong> - 12/05/2023 14:30</span>
+                                            <button class="toolbar-btn" style="padding: 2px 5px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                        <div class="comentario-texto">
+                                            Precisamos pesquisar mais sobre técnicas de investigação forense para a cena do laboratório.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="comentario-item">
+                                        <div class="comentario-header">
+                                            <span><strong>Maria</strong> - 13/05/2023 09:15</span>
+                                            <button class="toolbar-btn" style="padding: 2px 5px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                        <div class="comentario-texto">
+                                            Encontrei referências interessantes sobre a arquitetura da região onde se passa a história. Podemos usar isso para ambientar melhor as cenas.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="comentario-item">
+                                        <div class="comentario-header">
+                                            <span><strong>Carlos</strong> - 14/05/2023 16:45</span>
+                                            <button class="toolbar-btn" style="padding: 2px 5px; font-size: 0.8rem;"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                        <div class="comentario-texto">
+                                            Verifiquem as leis de porte de arma no estado onde a história se passa. Precisamos ser precisos nesse detalhe.
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 20px;">
+                                    <h4>Adicionar novo comentário</h4>
+                                    <textarea class="comentario-input" placeholder="Digite seu comentário..."></textarea>
+                                    <button class="toolbar-btn"><i class="fas fa-plus"></i> Adicionar Comentário</button>
+                                </div>
+                            </div>
+                            
+                            <div id="imagens-subaba" class="pesquisa-subaba-conteudo">
+                                <h3>Imagens de Referência</h3>
+                                <div class="imagens-grid">
+                                    <div class="imagem-item">
+                                        <div class="imagem-placeholder">
+                                            <i class="fas fa-image" style="font-size: 2rem;"></i>
+                                        </div>
+                                        <div class="imagem-info">
+                                            <p contenteditable="true">Localização: Centro da cidade</p>
+                                            <button class="toolbar-btn" style="width: 100%; margin-top: 5px;"><i class="fas fa-upload"></i> Carregar Imagem</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="imagem-item">
+                                        <div class="imagem-placeholder">
+                                            <i class="fas fa-image" style="font-size: 2rem;"></i>
+                                        </div>
+                                        <div class="imagem-info">
+                                            <p contenteditable="true">Personagem: Vestuário</p>
+                                            <button class="toolbar-btn" style="width: 100%; margin-top: 5px;"><i class="fas fa-upload"></i> Carregar Imagem</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="imagem-item">
+                                        <div class="imagem-placeholder">
+                                            <i class="fas fa-image" style="font-size: 2rem;"></i>
+                                        </div>
+                                        <div class="imagem-info">
+                                            <p contenteditable="true">Objeto: Arma do crime</p>
+                                            <button class="toolbar-btn" style="width: 100%; margin-top: 5px;"><i class="fas fa-upload"></i> Carregar Imagem</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="imagem-item">
+                                        <div class="imagem-placeholder">
+                                            <i class="fas fa-plus" style="font-size: 2rem;"></i>
+                                        </div>
+                                        <div class="imagem-info">
+                                            <p>Nova imagem</p>
+                                            <button class="toolbar-btn" style="width: 100%; margin-top: 5px;"><i class="fas fa-plus"></i> Adicionar Imagem</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="referencias-subaba" class="pesquisa-subaba-conteudo">
+                                <h3>Referências Bibliográficas</h3>
+                                <div class="comentarios-lista">
+                                    <div class="comentario-item">
+                                        <div class="comentario-header">
+                                            <span><strong>Livro: Investigação Criminal</strong> - João Silva, 2018</span>
+                                            <button class="toolbar-btn" style="padding: 2px 5px; font-size: 0.8rem;"><i class="fas fa-external-link-alt"></i></button>
+                                        </div>
+                                        <div class="comentario-texto">
+                                            Capítulo 5 sobre técnicas de análise forense (páginas 120-150)
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="comentario-item">
+                                        <div class="comentario-header">
+                                            <span><strong>Artigo: Arquitetura Urbana</strong> - Revista Urbanismo, 2021</span>
+                                            <button class="toolbar-btn" style="padding: 2px 5px; font-size: 0.8rem;"><i class="fas fa-external-link-alt"></i></button>
+                                        </div>
+                                        <div class="comentario-texto">
+                                            Edição de março, artigo sobre a evolução dos centros urbanos no século XXI
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="comentario-item">
+                                        <div class="comentario-header">
+                                            <span><strong>Site: Legislação Brasileira</strong> - www.legislacao.gov.br</span>
+                                            <button class="toolbar-btn" style="padding: 2px 5px; font-size: 0.8rem;"><i class="fas fa-external-link-alt"></i></button>
+                                        </div>
+                                        <div class="comentario-texto">
+                                            Lei 10.826/2003 - Estatuto do Desarmamento
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 20px;">
+                                    <h4>Adicionar nova referência</h4>
+                                    <input type="text" class="comentario-input" placeholder="Título...">
+                                    <textarea class="comentario-input" placeholder="Descrição..." rows="3"></textarea>
+                                    <button class="toolbar-btn"><i class="fas fa-plus"></i> Adicionar Referência</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -843,11 +1250,11 @@
             </div>
         </div>
         
-        <!-- Modal de Video -->
+        <!-- Modal de Video (agora Cara a Cara) -->
         <div class="modal" id="video-modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Chamada de Vídeo</h3>
+                    <h3>Cara a Cara</h3>
                     <button class="modal-close" id="close-video">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -866,11 +1273,11 @@
             </div>
         </div>
         
-        <!-- Modal de Chat -->
+        <!-- Modal de Chat (agora Fofoca) -->
         <div class="modal" id="chat-modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3>Chat de Colaboração</h3>
+                    <h3>Fofoca</h3>
                     <button class="modal-close" id="close-chat">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -888,6 +1295,25 @@
                     <div class="chat-input">
                         <input type="text" placeholder="Digite sua mensagem...">
                         <button>Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal do Buscador Online -->
+        <div class="modal buscador-modal" id="buscador-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Buscador Online</h3>
+                    <button class="modal-close" id="close-buscador">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="buscador-container">
+                        <div class="buscador-bar">
+                            <input type="text" class="buscador-input" placeholder="Digite sua pesquisa..." id="buscador-input">
+                            <button class="buscador-btn" id="buscador-btn"><i class="fas fa-search"></i></button>
+                        </div>
+                        <iframe class="buscador-frame" id="buscador-frame" src="about:blank"></iframe>
                     </div>
                 </div>
             </div>
@@ -1121,6 +1547,108 @@
                     if (command === 'Centralizar') document.execCommand('justifyCenter');
                     if (command === 'Alinhar à direita') document.execCommand('justifyRight');
                     if (command === 'Justificar') document.execCommand('justifyFull');
+                });
+            });
+            
+            // ===== NOVAS FUNCIONALIDADES =====
+            
+            // Controle de sub-abas na aba Pesquisa
+            document.querySelectorAll('.pesquisa-subaba').forEach(subaba => {
+                subaba.addEventListener('click', () => {
+                    const subabaId = subaba.getAttribute('data-subaba');
+                    
+                    // Desativar todas as sub-abas
+                    document.querySelectorAll('.pesquisa-subaba').forEach(s => {
+                        s.classList.remove('active');
+                    });
+                    document.querySelectorAll('.pesquisa-subaba-conteudo').forEach(c => {
+                        c.classList.remove('active');
+                    });
+                    
+                    // Ativar a sub-aba clicada
+                    subaba.classList.add('active');
+                    document.getElementById(subabaId).classList.add('active');
+                });
+            });
+            
+            // Buscador Online
+            const buscadorBtn = document.getElementById('buscador-btn');
+            const buscadorModal = document.getElementById('buscador-modal');
+            const closeBuscador = document.getElementById('close-buscador');
+            const buscadorInput = document.getElementById('buscador-input');
+            const buscadorFrame = document.getElementById('buscador-frame');
+            const buscadorSearchBtn = document.getElementById('buscador-btn');
+            
+            buscadorBtn.addEventListener('click', () => {
+                buscadorModal.style.display = 'flex';
+            });
+            
+            closeBuscador.addEventListener('click', () => {
+                buscadorModal.style.display = 'none';
+            });
+            
+            // Fechar modal do buscador clicando fora
+            window.addEventListener('click', (e) => {
+                if (e.target === buscadorModal) {
+                    buscadorModal.style.display = 'none';
+                }
+            });
+            
+            // Função para realizar busca
+            function realizarBusca() {
+                const termo = buscadorInput.value.trim();
+                if (termo) {
+                    // Codificar o termo de busca para URL
+                    const termoCodificado = encodeURIComponent(termo);
+                    // Definir a URL do Google com o termo de busca
+                    buscadorFrame.src = `https://www.google.com/search?q=${termoCodificado}`;
+                }
+            }
+            
+            buscadorSearchBtn.addEventListener('click', realizarBusca);
+            
+            buscadorInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    realizarBusca();
+                }
+            });
+            
+            // Novo Personagem
+            document.getElementById('novo-personagem-btn').addEventListener('click', () => {
+                const personagensGrid = document.querySelector('.personagens-grid');
+                const novoPersonagem = document.createElement('div');
+                novoPersonagem.className = 'personagem-card';
+                novoPersonagem.innerHTML = `
+                    <div class="personagem-header">
+                        <div class="personagem-nome" contenteditable="true">Novo Personagem</div>
+                        <div>
+                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-edit"></i></button>
+                            <button class="toolbar-btn" style="padding: 5px;"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="personagem-info">
+                        <p><strong>Idade:</strong> <span contenteditable="true"> </span></p>
+                        <p><strong>Ocupação:</strong> <span contenteditable="true"> </span></p>
+                        <p><strong>Personalidade:</strong> <span contenteditable="true"> </span></p>
+                    </div>
+                    <div class="personagem-descricao" contenteditable="true">
+                        Descrição do personagem...
+                    </div>
+                `;
+                personagensGrid.appendChild(novoPersonagem);
+                
+                // Adicionar evento para o botão de excluir
+                const deleteBtn = novoPersonagem.querySelector('.toolbar-btn:last-child');
+                deleteBtn.addEventListener('click', () => {
+                    personagensGrid.removeChild(novoPersonagem);
+                });
+            });
+            
+            // Adicionar evento para os botões de excluir personagem existentes
+            document.querySelectorAll('.personagem-card .toolbar-btn:last-child').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const card = this.closest('.personagem-card');
+                    card.parentNode.removeChild(card);
                 });
             });
         });
