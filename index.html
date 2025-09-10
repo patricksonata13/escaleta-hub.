@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escaleta Hub Light</title>
+    <style>
+        /* ESTILOS MÍNIMOS PARA PERFORMANCE MÁXIMA */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, Arial, sans-serif;
+            background: #f0f7ff; 
+            color: #2c3e50;
+            line-height: 1.5;
+            padding: 15px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        /* CABEÇALHO */
+        header {
+            background: #2a5a78;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        /* ABAS */
+        .tabs {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 15px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+        
+        .tab.active {
+            background: #2a5a78;
+            color: white;
+            border-radius: 5px;
+        }
+        
+        /* CONTEÚDO */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* FORMULÁRIOS */
+        textarea, input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        /* BOTÕES */
+        button {
+            background: #2a5a78;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        button:hover {
+            background: #3a6a90;
+        }
+        
+        /* RODAPÉ */
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 15px;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .tab {
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Escaleta Hub Light</h1>
+        <p>Sua plataforma de roteiros simplificada</p>
+    </header>
+    
+    <div class="tabs">
+        <button class="tab active" onclick="openTab('roteiro')">Roteiro</button>
+        <button class="tab" onclick="openTab('personagens')">Personagens</button>
+        <button class="tab" onclick="openTab('cenas')">Cenas</button>
+        <button class="tab" onclick="openTab('pesquisa')">Pesquisa</button>
+    </div>
+    
+    <!-- ABA ROTEIRO -->
+    <div id="roteiro" class="tab-content active">
+        <h2>Editor de Roteiro</h2>
+        <textarea id="script-editor" placeholder="Comece a escrever seu roteiro aqui...">
+INT. CASA DE JOÃO - DIA
+
+Uma casa simples. JOÃO mexe em papéis sobre a mesa.
+
+JOÃO
+Onde ela está? Já era para ter chegado.
+
+EXT. RUA - CONTÍNUO
+
+MARIA caminha apressadamente pela rua, segurando uma pasta.
+
+MARIA
+(para si mesma)
+Espero que ele ainda esteja lá.
+        </textarea>
+        <div>
+            <button onclick="saveContent()">Salvar</button>
+            <button onclick="addNewScene()">Nova Cena</button>
+            <button onclick="exportContent()">Exportar</button>
+        </div>
+    </div>
+    
+    <!-- ABA PERSONAGENS -->
+    <div id="personagens" class="tab-content">
+        <h2>Personagens</h2>
+        <input type="text" id="character-name" placeholder="Nome do personagem">
+        <textarea id="character-desc" placeholder="Descrição do personagem..."></textarea>
+        <div>
+            <button onclick="saveCharacter()">Salvar Personagem</button>
+            <button onclick="clearCharacters()">Limpar Tudo</button>
+        </div>
+        <div id="characters-list" style="margin-top: 20px;"></div>
+    </div>
+    
+    <!-- ABA CENAS -->
+    <div id="cenas" class="tab-content">
+        <h2>Lista de Cenas</h2>
+        <div id="scenes-list">
+            <div style="background: #e8f4ff; padding: 10px; margin-bottom: 10px; border-radius: 4px;">
+                <strong>INT. CASA DE JOÃO - DIA</strong>
+                <p>João procura por documentos importantes.</p>
+            </div>
+            <div style="background: #e8f4ff; padding: 10px; margin-bottom: 10px; border-radius: 4px;">
+                <strong>EXT. RUA - CONTÍNUO</strong>
+                <p>Maria caminha apressadamente pela rua.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ABA PESQUISA -->
+    <div id="pesquisa" class="tab-content">
+        <h2>Pesquisa e Anotações</h2>
+        <input type="text" id="research-title" placeholder="Título da pesquisa">
+        <textarea id="research-content" placeholder="Anotações de pesquisa..."></textarea>
+        <div>
+            <button onclick="saveResearch()">Salvar Pesquisa</button>
+        </div>
+        <div id="research-list" style="margin-top: 20px;"></div>
+    </div>
+    
+    <footer>
+        <p>Escaleta Hub Light - Funciona offline e em dispositivos antigos</p>
+        <p>Seus dados são salvos localmente no seu navegador</p>
+    </footer>
+
+    <script>
+        // Função para alternar entre abas
+        function openTab(tabName) {
+            // Esconder todos os conteúdos de abas
+            var tabContents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove('active');
+            }
+            
+            // Desativar todas as abas
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove('active');
+            }
+            
+            // Ativar a aba selecionada
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+            
+            // Carregar dados salvos se necessário
+            if (tabName === 'personagens') {
+                loadCharacters();
+            } else if (tabName === 'pesquisa') {
+                loadResearch();
+            }
+        }
+        
+        // Salvar conteúdo do roteiro
+        function saveContent() {
+            var content = document.getElementById('script-editor').value;
+            localStorage.setItem('roteiroContent', content);
+            alert('Roteiro salvo com sucesso!');
+        }
+        
+        // Adicionar nova cena
+        function addNewScene() {
+            var editor = document.getElementById('script-editor');
+            editor.value += '\n\nINT. NOVA CENA - DIA\n\nNova cena...';
+            editor.focus();
+        }
+        
+        // Exportar conteúdo
+        function exportContent() {
+            var content = document.getElementById('script-editor').value;
+            var blob = new Blob([content], { type: 'text/plain' });
+            var url = URL.createObjectURL(blob);
+            
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'meu-roteiro.txt';
+            a.click();
+            
+            URL.revokeObjectURL(url);
+        }
+        
+        // Salvar personagem
+        function saveCharacter() {
+            var name = document.getElementById('character-name').value;
+            var desc = document.getElementById('character-desc').value;
+            
+            if (!name) {
+                alert('Por favor, digite um nome para o personagem');
+                return;
+            }
+            
+            var characters = JSON.parse(localStorage.getItem('characters') || '[]');
+            characters.push({ name: name, description: desc });
+            localStorage.setItem('characters', JSON.stringify(characters));
+            
+            // Limpar campos
+            document.getElementById('character-name').value = '';
+            document.getElementById('character-desc').value = '';
+            
+            // Atualizar lista
+            loadCharacters();
+            alert('Personagem salvo com sucesso!');
+        }
+        
+        // Carregar personagens
+        function loadCharacters() {
+            var characters = JSON.parse(localStorage.getItem('characters') || '[]');
+            var listDiv = document.getElementById('characters-list');
+            
+            if (characters.length === 0) {
+                listDiv.innerHTML = '<p>Nenhum personagem salvo ainda.</p>';
+                return;
+            }
+            
+            var html = '<h3>Personagens Salvos</h3>';
+            for (var i = 0; i < characters.length; i++) {
+                html += '<div style="background: #e8f4ff; padding: 10px; margin-bottom: 10px; border-radius: 4px;">';
+                html += '<strong>' + characters[i].name + '</strong>';
+                html += '<p>' + characters[i].description + '</p>';
+                html += '</div>';
+            }
+            
+            listDiv.innerHTML = html;
+        }
+        
+        // Limpar personagens
+        function clearCharacters() {
+            if (confirm('Tem certeza que deseja excluir todos os personagens?')) {
+                localStorage.removeItem('characters');
+                loadCharacters();
+            }
+        }
+        
+        // Salvar pesquisa
+        function saveResearch() {
+            var title = document.getElementById('research-title').value;
+            var content = document.getElementById('research-content').value;
+            
+            if (!title) {
+                alert('Por favor, digite um título para sua pesquisa');
+                return;
+            }
+            
+            var research = JSON.parse(localStorage.getItem('research') || '[]');
+            research.push({ title: title, content: content });
+            localStorage.setItem('research', JSON.stringify(research));
+            
+            // Limpar campos
+            document.getElementById('research-title').value = '';
+            document.getElementById('research-content').value = '';
+            
+            // Atualizar lista
+            loadResearch();
+            alert('Pesquisa salva com sucesso!');
+        }
+        
+        // Carregar pesquisas
+        function loadResearch() {
+            var research = JSON.parse(localStorage.getItem('research') || '[]');
+            var listDiv = document.getElementById('research-list');
+            
+            if (research.length === 0) {
+                listDiv.innerHTML = '<p>Nenhuma pesquisa salva ainda.</p>';
+                return;
+            }
+            
+            var html = '<h3>Pesquisas Salvas</h3>';
+            for (var i = 0; i < research.length; i++) {
+                html += '<div style="background: #e8f4ff; padding: 10px; margin-bottom: 10px; border-radius: 4px;">';
+                html += '<strong>' + research[i].title + '</strong>';
+                html += '<p>' + research[i].content + '</p>';
+                html += '</div>';
+            }
+            
+            listDiv.innerHTML = html;
+        }
+        
+        // Carregar conteúdo salvo ao iniciar
+        window.onload = function() {
+            var savedContent = localStorage.getItem('roteiroContent');
+            if (savedContent) {
+                document.getElementById('script-editor').value = savedContent;
+            }
+        };
+    </script>
+</body>
+</html>
